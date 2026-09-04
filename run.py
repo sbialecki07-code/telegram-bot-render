@@ -12,7 +12,7 @@ DB_FILE = "bot_memory.db"
 
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-3.7-flash')
-keeo_alive()
+from keep_alive import keep_alive
 
 def init_db():
     conn = sqlite3.connect(DB_FILE)
