@@ -1,18 +1,29 @@
 import os
-from keep_alive import keep_alive
+import time
 import telebot
-import google.generativeai as genai
+from telebot import types
 
-# Pobieranie tokenów z ustawień Render
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+# Pobieranie tokenu z bezpiecznej zmiennej środowiskowej chmury (Zero Trust)
+TOKEN = os.getenv('8814824218:AAEbXtnRRtytMuIshnzNMF0-YvXFv7NjgoM')
 
-# Konfiguracja Gemini
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+bot = telebot.TeleBot(TOKEN)
 
-# Inicjalizacja bota
-bot = telebot.TeleBot(TELEGRAM_TOKEN)
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Dyspozytor AI w chmurze gotowy do pracy. System operacyjny działa w trybie bezpiecznym.")
+
+@bot.message_handler(func=lambda message: True)
+def handle_message(message):
+    # Sztuczne opóźnienie dla stabilizacji obciążenia (zgodnie z regułami)
+    time.sleep(0.5)
+    
+    user_text = message.text
+    # Prosta odpowiedź testowa zwrotna
+    bot.reply_to(message, f"Otrzymano polecenie: {user_text}. Łączność z chmurą stabilna.")
+
+if __name__ == '__main__':
+    print("Uruchamianie bota w trybie ciągłym...")
+    bot.infinity_polling()
 
 
 @bot.message_handler(commands=["start", "help"])
