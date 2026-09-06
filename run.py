@@ -3,8 +3,8 @@ import time
 import telebot
 from telebot import types
 
-# Pobieranie tokenu z bezpiecznej zmiennej środowiskowej chmury (Zero Trust)
-TOKEN = os.getenv('8814824218:AAEbXtnRRtytMuIshnzNMF0-YvXFv7NjgoM')
+# Pobieranie tokenu 
+TOKEN = "8814824218:AAEbXtnRRtytHuIshnzNHF0-YvXFv7NjgOH"
 
 bot = telebot.TeleBot(TOKEN)
 
